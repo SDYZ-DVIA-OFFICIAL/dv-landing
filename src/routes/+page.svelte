@@ -1,7 +1,16 @@
 <script>
 	import 'remixicon/fonts/remixicon.css';
 	import icon from '$lib/images/DV-LOGO.svg';
-	import { _, getLocaleFromNavigator } from 'svelte-i18n';
+	import { _, locale } from 'svelte-i18n';
+	import Live from '$lib/elements/Live.svelte';
+	let platform = 'bilibili';
+	locale.subscribe((value) => {
+		if (value === 'zh' || value === 'zh-CN' || value === 'zh-SG') {
+			platform = 'bilibili';
+		} else {
+			platform = 'youtube';
+		}
+	});
 </script>
 
 <div class="main">
@@ -12,7 +21,7 @@
 				<p>{$_('detail')}</p>
 			</div>
 			<div class="links">
-				{#if getLocaleFromNavigator() === 'zh' || getLocaleFromNavigator() === 'zh-CN' || getLocaleFromNavigator() === 'zh-SG'}
+				{#if platform === 'bilibili'}
 					<a href="https://space.bilibili.com/473013658" target="_blank"
 						><i class="ri-bilibili-line" />{$_('biliSpace')}</a
 					>
@@ -22,10 +31,13 @@
 					<a href="/" target="_blank"><i class="ri-tiktok-line" />{$_('dy')}</a>
 				{:else}
 					<a href="https://www.youtube.com/@SDYZDVIA"><i class="ri-youtube-line" />{$_('yt')}</a>
-					<a href="/" target="_blank"><i class="ri-telegram-line" />{$_('tg')}</a>
+					<a href="https://t.me/SDYZDVIA" target="_blank"
+						><i class="ri-telegram-line" />{$_('tg')}</a
+					>
 					<a href="/" target="_blank"><i class="ri-tiktok-line" />{$_('tt')}</a>
 				{/if}
 			</div>
+			<Live {platform} />
 		</div>
 		<div class="icon"><img src={icon} alt="icon" /></div>
 	</div>
@@ -36,13 +48,13 @@
 		@apply flex w-full flex-nowrap content-between justify-between lg:mb-10 lg:mt-10;
 	}
 	.icon {
-		@apply hidden lg:block;
+		@apply hidden md:block;
 	}
 	.icon > img {
-		@apply inline-block w-full;
+		@apply inline-block w-full rounded-[3rem];
 	}
 	.text {
-		@apply w-full grow pb-2 pt-2 lg:w-2/3 lg:pr-8 lg:text-left;
+		@apply w-full grow pb-2 pt-2 md:pr-8 lg:w-2/3 lg:text-left;
 	}
 	.motto {
 		@apply mb-4 text-4xl font-semibold capitalize lg:text-5xl;

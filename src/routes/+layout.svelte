@@ -14,9 +14,9 @@
 	// i18n init
 	import { locale, addMessages, init, getLocaleFromNavigator, _, locales } from 'svelte-i18n';
 	// @ts-ignore
-	import zh from '$lib/lang/zh.yaml';
+	import zh from '$lib/langs/zh.yaml';
 	// @ts-ignore
-	import en from '$lib/lang/en.yaml';
+	import en from '$lib/langs/en.yaml';
 	addMessages('zh', zh);
 	addMessages('zh-CN', zh);
 	addMessages('zh-SG', zh);
@@ -30,7 +30,7 @@
 </script>
 
 <svelte:head>
-	<title>DVIA</title>
+	<title>{$_('abb')}</title>
 </svelte:head>
 
 <div class="main">
@@ -40,9 +40,12 @@
 	</div>
 	<div class="content"><slot /></div>
 	<div class="footer">
-		<div>© DVIA 2006 - {new Date().getFullYear()}</div>
+		<div>
+			<div>Designed by HYH!</div>
+			<div>© DVIA 2006 - {new Date().getFullYear()}</div>
+		</div>
 		<div class="langs">
-			{#each navigator.languages as lo, index}
+			{#each $locales as lo, index}
 				{#if index !== 0}
 					/
 				{/if}
@@ -52,7 +55,7 @@
 					tabindex="0"
 					data-index={index}
 					on:click={(e) => {
-						locale.set(navigator.languages[e.target.dataset.index]);
+						locale.set($locales[e.target.dataset.index]);
 					}}
 				>
 					{lo}
@@ -74,13 +77,13 @@
 		@apply w-full lg:pl-32 lg:pr-32;
 	}
 	.nav {
-		@apply mb-4 flex h-24 w-full flex-row flex-nowrap items-center bg-red-100 shadow-lg shadow-red-100 lg:rounded-lg;
+		@apply mb-4 flex h-20 w-full flex-row flex-nowrap items-center bg-red-100 shadow-lg shadow-red-100 lg:rounded-2xl lg:pl-4 lg:pr-4;
 	}
 	.nav > div {
 		@apply ml-4 mr-4;
 	}
 	img {
-		@apply h-full max-h-full pb-4 pt-4;
+		@apply h-full max-h-full pb-6 pt-6;
 	}
 	.icon {
 		@apply h-full max-h-full;
@@ -92,13 +95,13 @@
 		@apply pl-4 pr-4;
 	}
 	.footer {
-		@apply mt-4 flex w-full flex-row-reverse pl-4 pr-4;
+		@apply mt-4 flex w-full flex-row-reverse flex-wrap place-items-end pb-4 pl-4 pr-4;
 	}
 	.footer > div {
-		@apply inline text-right;
+		@apply ml-2 mr-2 text-right;
 	}
 	.langs {
-		@apply uppercase;
+		@apply h-fit uppercase;
 	}
 	.langs > div {
 		@apply inline;
