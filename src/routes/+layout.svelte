@@ -18,9 +18,13 @@
 	// @ts-ignore
 	import en from '$lib/lang/en.yaml';
 	addMessages('zh', zh);
+	addMessages('zh-CN', zh);
+	addMessages('zh-SG', zh);
 	addMessages('en', en);
+	addMessages('en-US', en);
+	addMessages('en-GB', en);
 	init({
-		fallbackLocale: 'zh-CN',
+		fallbackLocale: 'en',
 		initialLocale: getLocaleFromNavigator()
 	});
 </script>
@@ -38,7 +42,7 @@
 	<div class="footer">
 		<div>© DVIA 2006 - {new Date().getFullYear()}</div>
 		<div class="langs">
-			{#each $locales as lo, index}
+			{#each navigator.languages as lo, index}
 				{#if index !== 0}
 					/
 				{/if}
@@ -48,7 +52,7 @@
 					tabindex="0"
 					data-index={index}
 					on:click={(e) => {
-						locale.set($locales[e.target.dataset.index]);
+						locale.set(navigator.languages[e.target.dataset.index]);
 					}}
 				>
 					{lo}

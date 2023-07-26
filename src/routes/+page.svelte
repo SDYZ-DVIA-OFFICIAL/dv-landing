@@ -12,11 +12,11 @@
 				<p>{$_('detail')}</p>
 			</div>
 			<div class="links">
-				{#if getLocaleFromNavigator() === 'zh'}
+				{#if getLocaleFromNavigator() === 'zh' || getLocaleFromNavigator() === 'zh-CN' || getLocaleFromNavigator() === 'zh-SG'}
 					<a href="https://space.bilibili.com/473013658" target="_blank"
 						><i class="ri-bilibili-line" />{$_('biliSpace')}</a
 					>
-					<a href="https://space.bilibili.com/473013658" target="_blank"
+					<a href="https://live.bilibili.com/22590024" target="_blank"
 						><i class="ri-bilibili-line" />{$_('biliLive')}</a
 					>
 					<a href="/" target="_blank"><i class="ri-tiktok-line" />{$_('dy')}</a>
