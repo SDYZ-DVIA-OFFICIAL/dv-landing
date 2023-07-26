@@ -1,26 +1,30 @@
 <script>
 	import 'remixicon/fonts/remixicon.css';
 	import icon from '$lib/images/DV-LOGO.svg';
+	import { _, getLocaleFromNavigator } from 'svelte-i18n';
 </script>
 
 <div class="main">
 	<div class="head">
 		<div class="text">
-			<div class="motto">The place where your dreams come true.</div>
+			<div class="motto">{$_('motto')}</div>
 			<div class="detail">
-				Founded in 2006, DVIA is one of the largest and oldest digital video associations in the
-				southern part of the People's Republic of China.
+				<p>{$_('detail')}</p>
 			</div>
 			<div class="links">
-				<div class="tabs">
+				{#if getLocaleFromNavigator() === 'zh'}
 					<a href="https://space.bilibili.com/473013658" target="_blank"
-						><i class="ri-bilibili-line" />bilibili</a
+						><i class="ri-bilibili-line" />{$_('biliSpace')}</a
 					>
-					<a href="/" target="_blank"><i class="ri-tiktok-line" />Douyin</a>
-					<a href="https://www.youtube.com/@SDYZDVIA"><i class="ri-youtube-line" />YouTube</a>
-					<a href="/" target="_blank"><i class="ri-telegram-line" />Telegram</a>
-					<a href="/" target="_blank"><i class="ri-tiktok-line" />Tiktok</a>
-				</div>
+					<a href="https://space.bilibili.com/473013658" target="_blank"
+						><i class="ri-bilibili-line" />{$_('biliLive')}</a
+					>
+					<a href="/" target="_blank"><i class="ri-tiktok-line" />{$_('dy')}</a>
+				{:else}
+					<a href="https://www.youtube.com/@SDYZDVIA"><i class="ri-youtube-line" />{$_('yt')}</a>
+					<a href="/" target="_blank"><i class="ri-telegram-line" />{$_('tg')}</a>
+					<a href="/" target="_blank"><i class="ri-tiktok-line" />{$_('tt')}</a>
+				{/if}
 			</div>
 		</div>
 		<div class="icon"><img src={icon} alt="icon" /></div>
@@ -46,8 +50,8 @@
 	.detail {
 		@apply mb-4 mt-4 text-lg font-normal;
 	}
-	.tabs > a {
-		@apply tab tab-active text-lg text-black;
+	.links > a {
+		@apply inline;
 	}
 	i {
 		@apply pl-1 pr-1;

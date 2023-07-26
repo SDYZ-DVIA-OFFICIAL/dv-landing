@@ -1,32 +1,76 @@
 <script>
+	// @ts-nocheck
+
 	import '../app.css';
 	import logo from '$lib/images/DV-DARK-LOGO.svg';
+	import '@fontsource/ibm-plex-sans/400.css';
+	import '@fontsource/ibm-plex-sans/500.css';
+	import '@fontsource/ibm-plex-sans/600.css';
+	import '@fontsource/ibm-plex-sans/700.css';
+	import '@fontsource/noto-sans-sc/400.css';
+	import '@fontsource/noto-sans-sc/500.css';
+	import '@fontsource/noto-sans-sc/700.css';
+
+	// i18n init
+	import { locale, addMessages, init, getLocaleFromNavigator, _, locales } from 'svelte-i18n';
+	// @ts-ignore
+	import zh from '$lib/lang/zh.yaml';
+	// @ts-ignore
+	import en from '$lib/lang/en.yaml';
+	addMessages('zh', zh);
+	addMessages('en', en);
+	init({
+		fallbackLocale: 'zh-CN',
+		initialLocale: getLocaleFromNavigator()
+	});
 </script>
+
+<svelte:head>
+	<title>DVIA</title>
+</svelte:head>
 
 <div class="main">
 	<div class="nav">
 		<div class="icon"><img src={logo} alt="icon" /></div>
-		<div class="name">The Digital Video Intelligence Association</div>
+		<div class="name">{$_('name')}</div>
 	</div>
 	<div class="content"><slot /></div>
 	<div class="footer">
-		© DVIA 2006 - {new Date().getFullYear()}
+		<div>© DVIA 2006 - {new Date().getFullYear()}</div>
+		<div class="langs">
+			{#each $locales as lo, index}
+				{#if index !== 0}
+					/
+				{/if}
+				<!-- svelte-ignore a11y-click-events-have-key-events -->
+				<div
+					role="button"
+					tabindex="0"
+					data-index={index}
+					on:click={(e) => {
+						locale.set($locales[e.target.dataset.index]);
+					}}
+				>
+					{lo}
+				</div>
+			{/each}
+		</div>
 	</div>
 </div>
 
 <style lang="postcss">
 	:global(html) {
-		@apply m-0 p-0;
+		@apply m-0;
 	}
 	:global(body) {
-		font-family: 'IBM Plex Sans', sans-serif;
-		@apply min-h-screen bg-red-50 text-black;
+		font-family: 'IBM Plex Sans', 'Noto Sans SC', sans-serif;
+		@apply m-0 min-h-screen w-full bg-red-50 p-0 text-black lg:pt-4;
 	}
 	.main {
 		@apply w-full lg:pl-32 lg:pr-32;
 	}
 	.nav {
-		@apply mb-4 flex h-24 w-full flex-row flex-nowrap items-center bg-red-100;
+		@apply mb-4 flex h-24 w-full flex-row flex-nowrap items-center bg-red-100 shadow-lg shadow-red-100 lg:rounded-lg;
 	}
 	.nav > div {
 		@apply ml-4 mr-4;
@@ -41,9 +85,18 @@
 		@apply text-xl;
 	}
 	.content {
-		@apply ml-4 mr-4;
+		@apply pl-4 pr-4;
 	}
 	.footer {
-		@apply ml-2 mr-2 mt-4;
+		@apply mt-4 flex w-full flex-row-reverse pl-4 pr-4;
+	}
+	.footer > div {
+		@apply inline text-right;
+	}
+	.langs {
+		@apply uppercase;
+	}
+	.langs > div {
+		@apply inline;
 	}
 </style>
