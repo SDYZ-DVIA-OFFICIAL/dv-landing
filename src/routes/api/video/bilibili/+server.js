@@ -25,7 +25,6 @@ export async function GET() {
 					},
 					referrerPolicy: 'strict-origin-when-cross-origin',
 					method: 'GET',
-					mode: 'cors',
 					credentials: 'include'
 				})
 			).json()
