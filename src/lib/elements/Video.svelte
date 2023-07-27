@@ -1,9 +1,10 @@
 <script>
 	import dayjs from 'dayjs';
 	import duration from 'dayjs/plugin/duration';
-	dayjs.extend(duration);
 	import { _ } from 'svelte-i18n';
+	import error from '$lib/images/ERROR.jpg';
 	import { onMount } from 'svelte';
+	dayjs.extend(duration);
 	export let platform = 'bilibili';
 	let liveData = {
 		data: {
@@ -165,7 +166,7 @@
 				allowfullscreen="true"
 			/>
 		{:else}
-			<div class="placeholder">
+			<div class="placeholder" style="background-image: url({error});">
 				<div>{$_('noSignal')}</div>
 			</div>
 		{/if}
@@ -209,12 +210,13 @@
 		left: 0;
 		width: 100%;
 		height: 100%;
-		@apply rounded-lg bg-black shadow-md shadow-black;
+		@apply overflow-hidden rounded-lg bg-black shadow-md shadow-black;
 	}
 	.placeholder {
-		@apply flex flex-nowrap content-center items-center justify-center text-gray-100;
+		@apply z-0 flex flex-nowrap content-center items-center justify-center  bg-cover bg-center bg-no-repeat text-gray-100 md:text-xl;
 	}
 	.placeholder > div {
-		@apply pl-8 pr-8 text-xs sm:text-lg md:text-xl;
+		text-shadow: 0 0 0.5rem black;
+		@apply z-10 pl-8 pr-8 text-xs sm:text-lg;
 	}
 </style>
