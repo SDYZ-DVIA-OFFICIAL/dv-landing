@@ -107,7 +107,9 @@
 		@apply pl-4 pr-4;
 	}
 	.footer {
-		@apply mt-4 flex w-full flex-row-reverse flex-wrap place-items-end pb-4 pl-4 pr-4;
+		place-items: flex-en;
+		@apply mt-4 flex w-full flex-row-reverse flex-wrap items-end justify-start
+			pb-4 pl-4 pr-4;
 	}
 	.footer > div {
 		@apply ml-2 mr-2 text-right;

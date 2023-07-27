@@ -10,9 +10,15 @@ yt: YouTube
 tg: Telegram
 tt: Tiktok
 
+liveNow: Live Now!
 watcher: Watcher
 follower: Follower
 duration: Duration
 minutes: Minutes
 offline: Offline
 noSignal: No Signal
+
+latestVideo: Latest Video
+play: Play
+comment: Comment
+create: Update

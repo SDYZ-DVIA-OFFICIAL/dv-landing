@@ -10,9 +10,15 @@ yt: YouTube
 tg: Telegram
 tt: Tiktok
 
+liveNow: 正在直播！
 watcher: 观看人数
 follower: 关注人数
 duration: 开播时长
 minutes: 分钟
 offline: 离线
 noSignal: 无信号
+
+latestVideo: 最新视频
+play: 播放量
+comment: 评论数
+create: 创建时间

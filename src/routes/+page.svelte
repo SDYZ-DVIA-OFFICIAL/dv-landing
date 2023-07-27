@@ -2,7 +2,7 @@
 	import 'remixicon/fonts/remixicon.css';
 	import icon from '$lib/images/DV-LOGO.svg';
 	import { _, locale } from 'svelte-i18n';
-	import Live from '$lib/elements/Live.svelte';
+	import Video from '$lib/elements/Video.svelte';
 	let platform = 'bilibili';
 	locale.subscribe((value) => {
 		if (value === 'zh' || value === 'zh-CN' || value === 'zh-SG') {
@@ -37,7 +37,7 @@
 					<a href="/" target="_blank"><i class="ri-tiktok-line" />{$_('tt')}</a>
 				{/if}
 			</div>
-			<Live {platform} />
+			<Video {platform} />
 		</div>
 		<div class="icon"><img src={icon} alt="icon" /></div>
 	</div>
