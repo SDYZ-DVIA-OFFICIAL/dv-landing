@@ -15,11 +15,10 @@
 		}
 	};
 	async function fetchLiveData() {
-		const data = await (await fetch(`/api/live/bilibili`)).json();
-		if (data.code == 0) liveData = data;
-		console.log(liveData);
+		return await (await fetch(`/api/live/bilibili`)).json();
 	}
 	let videoData = {
+		load: 404,
 		data: {
 			list: {
 				vlist: [
@@ -37,72 +36,101 @@
 		}
 	};
 	async function fetchVideoData() {
-		const data = await (await fetch(`/api/video/bilibili`)).json();
-		if (data.code == 0) videoData = data;
-		console.log(videoData);
+		return await (await fetch(`/api/video/bilibili`)).json();
+	}
+	function formatNumber(num) {
+		if (platform === 'bilibili') {
+			if (num >= 10000) return `${String(num)[0]}.${String(num)[1]}W`;
+		} else {
+			if (num >= 1000000) return `${String(num)[0]}.${String(num)[1]}M`;
+		}
+		return num;
+	}
+	$: {
+		(() => {
+			liveData.data.online = formatNumber(liveData.data.online);
+			liveData.data.attention = formatNumber(liveData.data.attention);
+			videoData.data.list.vlist[0].play = formatNumber(videoData.data.list.vlist[0].play);
+			videoData.data.list.vlist[0].comment = formatNumber(videoData.data.list.vlist[0].comment);
+		})(platform);
 	}
 	onMount(() => {
-		fetchLiveData();
-		fetchVideoData();
+		fetchLiveData().then((value) => {
+			if (value.code == 0) {
+				value.data.online = formatNumber(value.data.online);
+				value.data.attention = formatNumber(value.data.attention);
+				liveData = value;
+			}
+		});
+		fetchVideoData().then((value) => {
+			if (value.code == 0) {
+				value.data.list.vlist[0].play = formatNumber(value.data.list.vlist[0].play);
+				value.data.list.vlist[0].comment = formatNumber(value.data.list.vlist[0].comment);
+				videoData = value;
+			}
+		});
 		setInterval(fetchLiveData, 150000);
 	});
 </script>
 
 <div class="main">
-	<table>
-		<thead>
-			<tr>
-				<th colspan="3">
-					{#if liveData.data.live_status !== 0}
-						<div>{$_('liveNow')} {liveData.data.title}</div>
-					{:else}
-						<div>{$_('latestVideo')} {videoData.data.list.vlist[0].title}</div>
-					{/if}
-				</th>
-			</tr>
-		</thead>
-		<tbody>
-			<tr>
-				<th
-					><div>
+	{#if videoData.load !== 404 || liveData.data.live_status !== 0}
+		<table>
+			<thead>
+				<tr>
+					<th colspan="3">
 						{#if liveData.data.live_status !== 0}
-							<div>{$_('watcher')}</div>
-							<div>{liveData.data.online}</div>
+							<div>{$_('liveNow')} {liveData.data.title}</div>
 						{:else}
-							<div>{$_('play')}</div>
-							<div>{videoData.data.list.vlist[0].play}</div>
+							<div>{$_('latestVideo')} {videoData.data.list.vlist[0].title}</div>
 						{/if}
-					</div></th
-				>
-				<th
-					><div>
-						{#if liveData.data.live_status !== 0}
-							<div>{$_('follower')}</div>
-							<div>{liveData.data.attention}</div>
-						{:else}
-							<div>{$_('comment')}</div>
-							<div>{videoData.data.list.vlist[0].comment}</div>
-						{/if}
-					</div></th
-				>
-				<th
-					><div>
-						{#if liveData.data.live_status !== 0}
-							<div>{$_('duration')}</div>
-							<div>
-								{dayjs.duration(Date.now() - dayjs(liveData.data.live_time).millisecond(), 'm')}{$_(
-									'minutes'
-								)}
-							</div>
-						{:else}
-							<div>{$_('create')}</div>
-							<div>{dayjs(videoData.data.list.vlist[0].created * 1000).format(`YYYY/MM/DD`)}</div>
-						{/if}
-					</div></th
-				>
-			</tr>
-		</tbody>
-	</table>
+					</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<th
+						><div>
+							{#if liveData.data.live_status !== 0}
+								<div>{$_('watcher')}</div>
+								<div>{liveData.data.online}</div>
+							{:else}
+								<div>{$_('play')}</div>
+								<div>{videoData.data.list.vlist[0].play}</div>
+							{/if}
+						</div></th
+					>
+					<th
+						><div>
+							{#if liveData.data.live_status !== 0}
+								<div>{$_('follower')}</div>
+								<div>{liveData.data.attention}</div>
+							{:else}
+								<div>{$_('comment')}</div>
+								<div>{videoData.data.list.vlist[0].comment}</div>
+							{/if}
+						</div></th
+					>
+					<th
+						><div>
+							{#if liveData.data.live_status !== 0}
+								<div>{$_('duration')}</div>
+								<div>
+									{dayjs.duration(
+										Date.now() - dayjs(liveData.data.live_time).millisecond(),
+										'm'
+									)}{$_('minutes')}
+								</div>
+							{:else}
+								<div>{$_('create')}</div>
+								<div>{dayjs(videoData.data.list.vlist[0].created * 1000).format(`YYYY/MM/DD`)}</div>
+							{/if}
+						</div></th
+					>
+				</tr>
+			</tbody>
+		</table>
+	{/if}
 	<div class="video">
 		{#if liveData.data.live_status !== 0}
 			{#if platform === 'bilibili'}
@@ -126,7 +154,7 @@
 					allowfullscreen="true"
 				/>
 			{/if}
-		{:else}
+		{:else if videoData.load != 404}
 			<iframe
 				title="latest video"
 				src="https://player.bilibili.com/player.html?aid=742421374&bvid=BV1jk4y1M7NJ&cid=1166635786&page=1&high_quality=1"
@@ -136,13 +164,17 @@
 				framespacing="0"
 				allowfullscreen="true"
 			/>
+		{:else}
+			<div class="placeholder">
+				<div>{$_('noSignal')}</div>
+			</div>
 		{/if}
 	</div>
 </div>
 
 <style lang="postcss">
 	.main {
-		@apply mb-4 mt-4 rounded-xl bg-red-200 p-2  shadow-red-200 dark:bg-cyan-800 dark:shadow-sky-800;
+		@apply mb-4 mt-4 overflow-hidden rounded-xl bg-red-200 p-2 shadow-lg  shadow-red-200 dark:bg-cyan-800 dark:shadow-sky-800;
 	}
 	table {
 		@apply mb-2 w-full text-left;
@@ -160,7 +192,7 @@
 		@apply mr-0;
 	}
 	tbody > tr > th > div {
-		@apply ml-1 mr-1 rounded-lg bg-red-300 pb-2 pl-4 pr-4 pt-2 text-xl font-semibold shadow-lg shadow-red-300 dark:bg-cyan-700 dark:shadow-cyan-700;
+		@apply ml-1 mr-1 rounded-lg bg-red-300 pb-2 pl-4 pr-4 pt-2 text-base font-semibold shadow-lg shadow-red-300 dark:bg-cyan-700 dark:shadow-cyan-700 sm:text-xl;
 	}
 	tbody > tr > th > div > div:first-child {
 		@apply text-sm font-normal;
@@ -177,12 +209,12 @@
 		left: 0;
 		width: 100%;
 		height: 100%;
-		@apply rounded-lg bg-black shadow-sm shadow-black;
+		@apply rounded-lg bg-black shadow-md shadow-black;
 	}
 	.placeholder {
 		@apply flex flex-nowrap content-center items-center justify-center text-gray-100;
 	}
 	.placeholder > div {
-		@apply text-xl hover:underline;
+		@apply pl-8 pr-8 text-xs sm:text-lg md:text-xl;
 	}
 </style>

@@ -1,5 +1,4 @@
 import md5 from 'md5';
-import axios from 'axios';
 
 export async function getWridWts() {
 	const mixinKeyEncTab = [
@@ -42,14 +41,11 @@ export async function getWridWts() {
 
 	// 获取最新的 img_key 和 sub_key
 	async function getWbiKeys() {
-		const resp = await axios({
-				url: 'https://api.bilibili.com/x/web-interface/nav',
-				method: 'get',
-				responseType: 'json'
-			}),
-			json_content = resp.data,
-			img_url = json_content.data.wbi_img.img_url,
-			sub_url = json_content.data.wbi_img.sub_url;
+		const response = await fetch('https://api.bilibili.com/x/web-interface/nav');
+		const json_content = await response.json();
+		const img_url = json_content.data.wbi_img.img_url;
+		const sub_url = json_content.data.wbi_img.sub_url;
+
 		return {
 			img_key: img_url.substring(img_url.lastIndexOf('/') + 1, img_url.length).split('.')[0],
 			sub_key: sub_url.substring(sub_url.lastIndexOf('/') + 1, sub_url.length).split('.')[0]

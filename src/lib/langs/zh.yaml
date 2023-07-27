@@ -16,7 +16,7 @@ follower: 关注人数
 duration: 开播时长
 minutes: 分钟
 offline: 离线
-noSignal: 无信号
+noSignal: 抱歉！服务器可能正由于访问量过大而遭遇哔哩哔哩风控，暂时无法获取到有效数据。如果能获取到正在进行的直播或新上传的视频，它会显示在这里。
 
 latestVideo: 最新视频
 play: 播放量

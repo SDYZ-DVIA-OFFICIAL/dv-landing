@@ -83,7 +83,7 @@
 		@apply w-full md:pl-12 md:pr-12 lg:pl-32 lg:pr-32;
 	}
 	.nav {
-		@apply mb-8 flex h-20 w-full flex-row flex-nowrap items-center bg-red-100 shadow-lg shadow-red-100 dark:bg-cyan-900 dark:shadow-sky-900 md:mb-10 md:rounded-2xl lg:pl-4 lg:pr-4;
+		@apply mb-8 flex h-20 w-full flex-row flex-nowrap items-center bg-red-200 shadow-lg shadow-red-200 dark:bg-cyan-800 dark:shadow-sky-800 md:mb-10 md:rounded-2xl lg:pl-4 lg:pr-4;
 	}
 	.nav > div {
 		@apply ml-4 mr-4;

@@ -16,7 +16,7 @@ follower: Follower
 duration: Duration
 minutes: Minutes
 offline: Offline
-noSignal: No Signal
+noSignal: My master, sorry! The server may be under Bilibili's risk control due to excessive traffic, and valid data cannot be obtained temporarily. If an ongoing live stream or newly uploaded video is available, it will appear here.
 
 latestVideo: Latest Video
 play: Play

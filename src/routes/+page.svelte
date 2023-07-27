@@ -5,7 +5,7 @@
 	import Video from '$lib/elements/Video.svelte';
 	let platform = 'bilibili';
 	locale.subscribe((value) => {
-		if (value === 'zh' || value === 'zh-CN' || value === 'zh-SG') {
+		if (value.slice(0, 2) === 'zh') {
 			platform = 'bilibili';
 		} else {
 			platform = 'youtube';
@@ -16,7 +16,10 @@
 <div class="main">
 	<div class="head">
 		<div class="text">
-			<div class="motto">{$_('motto')}</div>
+			<div class="motto">
+				<div class="small-icon"><img src={icon} alt="icon" /></div>
+				{$_('motto')}
+			</div>
 			<div class="detail">
 				<p>{$_('detail')}</p>
 			</div>
@@ -39,7 +42,7 @@
 			</div>
 			<Video {platform} />
 		</div>
-		<div class="icon"><img src={icon} alt="icon" /></div>
+		<div class="big-icon"><img src={icon} alt="icon" /></div>
 	</div>
 </div>
 
@@ -47,17 +50,23 @@
 	.head {
 		@apply flex w-full flex-nowrap content-between justify-between;
 	}
-	.icon {
+	.small-icon {
+		@apply inline-block h-10 md:hidden;
+	}
+	.small-icon > img {
+		@apply mb-2 inline-block h-6 rounded-md;
+	}
+	.big-icon {
 		@apply hidden md:block;
 	}
-	.icon > img {
-		@apply inline-block w-full rounded-[3rem];
+	.big-icon > img {
+		@apply inline-block w-full rounded-[2rem] shadow-xl shadow-red-600;
 	}
 	.text {
 		@apply w-full grow pb-2 pt-2 md:pr-8 lg:w-2/3 lg:text-left;
 	}
 	.motto {
-		@apply mb-4 text-4xl font-semibold capitalize lg:text-5xl;
+		@apply mb-4 text-3xl font-semibold capitalize md:text-5xl;
 	}
 	.detail {
 		@apply mb-4 mt-4 text-lg font-normal;
