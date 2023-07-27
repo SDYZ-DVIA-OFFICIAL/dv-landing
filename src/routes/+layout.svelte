@@ -1,6 +1,4 @@
 <script>
-	// @ts-nocheck
-
 	import '../app.css';
 	import darkLogo from '$lib/images/DV-DARK-LOGO.svg';
 	import lightLogo from '$lib/images/DV-WHITE-LOGO.svg';
@@ -14,9 +12,7 @@
 
 	// i18n init
 	import { locale, addMessages, init, getLocaleFromNavigator, _, locales } from 'svelte-i18n';
-	// @ts-ignore
 	import zh from '$lib/langs/zh.yaml';
-	// @ts-ignore
 	import en from '$lib/langs/en.yaml';
 	addMessages('zh', zh);
 	addMessages('zh-CN', zh);
