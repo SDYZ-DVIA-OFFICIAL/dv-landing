@@ -23,9 +23,7 @@ export async function GET() {
 						'sec-fetch-user': '?1',
 						'upgrade-insecure-requests': '1'
 					},
-					referrerPolicy: 'strict-origin-when-cross-origin',
-					method: 'GET',
-					credentials: 'include'
+					referrerPolicy: 'strict-origin-when-cross-origin'
 				})
 			).json()
 		)
