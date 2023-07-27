@@ -22,8 +22,7 @@ export async function GET() {
 						'sec-fetch-site': 'none',
 						'sec-fetch-user': '?1',
 						'upgrade-insecure-requests': '1'
-					},
-					referrerPolicy: 'strict-origin-when-cross-origin'
+					}
 				})
 			).json()
 		)
