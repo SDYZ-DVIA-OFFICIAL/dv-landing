@@ -37,6 +37,7 @@
 	"dependencies": {
 		"@fontsource/ibm-plex-sans": "^5.0.5",
 		"@fontsource/noto-sans-sc": "^5.0.5",
+		"animate.css": "^4.1.1",
 		"md5": "^2.3.0",
 		"remixicon": "^3.4.0"
 	}

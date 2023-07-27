@@ -1,4 +1,5 @@
 <script>
+	import 'animate.css/animate.min.css';
 	import dayjs from 'dayjs';
 	import duration from 'dayjs/plugin/duration';
 	import { _ } from 'svelte-i18n';
@@ -166,7 +167,10 @@
 				allowfullscreen="true"
 			/>
 		{:else}
-			<div class="placeholder" style="background-image: url({error});">
+			<div
+				class="placeholder animate__animated animate__fast"
+				style="background-image: url({error})"
+			>
 				<div>{$_('noSignal')}</div>
 			</div>
 		{/if}
@@ -213,7 +217,19 @@
 		@apply overflow-hidden rounded-lg bg-black shadow-md shadow-black;
 	}
 	.placeholder {
+		animation: wait 10s ease-in-out, headShake 1s ease-in-out 10s;
 		@apply z-0 flex flex-nowrap content-center items-center justify-center  bg-cover bg-center bg-no-repeat text-gray-100 md:text-xl;
+	}
+	@keyframes wait {
+		0% {
+			filter: brightness(0);
+		}
+		90% {
+			filter: brightness(0);
+		}
+		100% {
+			filter: unset;
+		}
 	}
 	.placeholder > div {
 		text-shadow: 0 0 0.5rem black;
