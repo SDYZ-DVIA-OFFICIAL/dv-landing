@@ -32,6 +32,10 @@
 
 <svelte:head>
 	<title>{$_('abb')}</title>
+	<meta
+		name="description"
+		content="The Digital Video Intelligence Association Official Website. DVIA is the place where your dreams come true."
+	/>
 </svelte:head>
 
 <div class="main">
@@ -44,7 +48,7 @@
 	<div class="footer">
 		<div>
 			<div>Designed by HYH!</div>
-			<div>© DVIA 2006 - {new Date().getFullYear()}</div>
+			<div>© {$_('abb')} 2006 - {new Date().getFullYear()}</div>
 		</div>
 		<div class="langs">
 			{#each $locales as lo, index}
