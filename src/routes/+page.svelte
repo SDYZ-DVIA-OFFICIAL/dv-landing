@@ -45,7 +45,7 @@
 
 <style lang="postcss">
 	.head {
-		@apply flex w-full flex-nowrap content-between justify-between lg:mb-10 lg:mt-10;
+		@apply flex w-full flex-nowrap content-between justify-between;
 	}
 	.icon {
 		@apply hidden md:block;

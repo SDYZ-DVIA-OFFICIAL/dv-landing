@@ -48,8 +48,8 @@
 			</tr>
 		</tbody>
 	</table>
-	{#key platform}
-		<div class="video">
+	<div class="video">
+		{#if data.data.live_status !== 0}
 			{#if platform === 'bilibili'}
 				<iframe
 					title="bilibili live"
@@ -71,13 +71,18 @@
 					allowfullscreen="true"
 				/>
 			{/if}
-		</div>
-	{/key}
+		{:else}
+			<div class="placeholder">
+				<!-- svelte-ignore a11y-click-events-have-key-events -->
+				<div role="button" tabindex="0" on:click={fetchData}>{$_('noSignal')}</div>
+			</div>
+		{/if}
+	</div>
 </div>
 
 <style lang="postcss">
 	.main {
-		@apply mb-4 mt-4 rounded-xl bg-red-200 p-2  shadow-red-200;
+		@apply mb-4 mt-4 rounded-xl bg-red-200 p-2  shadow-red-200 dark:bg-cyan-800 dark:shadow-sky-800;
 	}
 	table {
 		@apply mb-2 w-full text-center;
@@ -96,12 +101,19 @@
 		padding-bottom: 56.25%;
 		width: 100%;
 	}
-	iframe {
+	iframe,
+	.placeholder {
 		position: absolute;
 		top: 0;
 		left: 0;
 		width: 100%;
 		height: 100%;
 		@apply rounded-lg bg-black shadow-sm shadow-black;
+	}
+	.placeholder {
+		@apply flex flex-nowrap content-center items-center justify-center text-gray-100;
+	}
+	.placeholder > div {
+		@apply text-xl hover:underline;
 	}
 </style>

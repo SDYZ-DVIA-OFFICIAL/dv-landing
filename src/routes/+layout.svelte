@@ -2,7 +2,8 @@
 	// @ts-nocheck
 
 	import '../app.css';
-	import logo from '$lib/images/DV-DARK-LOGO.svg';
+	import darkLogo from '$lib/images/DV-DARK-LOGO.svg';
+	import lightLogo from '$lib/images/DV-WHITE-LOGO.svg';
 	import '@fontsource/ibm-plex-sans/400.css';
 	import '@fontsource/ibm-plex-sans/500.css';
 	import '@fontsource/ibm-plex-sans/600.css';
@@ -35,7 +36,8 @@
 
 <div class="main">
 	<div class="nav">
-		<div class="icon"><img src={logo} alt="icon" /></div>
+		<div class="icon dark-icon"><img src={darkLogo} alt="icon" /></div>
+		<div class="icon light-icon"><img src={lightLogo} alt="icon" /></div>
 		<div class="name">{$_('name')}</div>
 	</div>
 	<div class="content"><slot /></div>
@@ -71,13 +73,13 @@
 	}
 	:global(body) {
 		font-family: 'IBM Plex Sans', 'Noto Sans SC', sans-serif;
-		@apply m-0 min-h-screen w-full bg-red-50 p-0 text-black lg:pt-4;
+		@apply m-0 min-h-screen w-full bg-red-50 p-0 text-black dark:bg-cyan-950 dark:text-white md:pt-4;
 	}
 	.main {
-		@apply w-full lg:pl-32 lg:pr-32;
+		@apply w-full md:pl-12 md:pr-12 lg:pl-32 lg:pr-32;
 	}
 	.nav {
-		@apply mb-4 flex h-20 w-full flex-row flex-nowrap items-center bg-red-100 shadow-lg shadow-red-100 lg:rounded-2xl lg:pl-4 lg:pr-4;
+		@apply mb-8 flex h-20 w-full flex-row flex-nowrap items-center bg-red-100 shadow-lg shadow-red-100 dark:bg-cyan-900 dark:shadow-sky-900 md:mb-10 md:rounded-2xl lg:pl-4 lg:pr-4;
 	}
 	.nav > div {
 		@apply ml-4 mr-4;
@@ -87,6 +89,12 @@
 	}
 	.icon {
 		@apply h-full max-h-full;
+	}
+	.dark-icon {
+		@apply inline-block dark:hidden;
+	}
+	.light-icon {
+		@apply hidden dark:inline-block;
 	}
 	.name {
 		@apply text-xl;
