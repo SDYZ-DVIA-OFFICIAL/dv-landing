@@ -36,8 +36,8 @@
 
 <div class="main">
 	<div class="nav">
-		<div class="icon dark-icon"><img src={darkLogo} alt="icon" /></div>
-		<div class="icon light-icon"><img src={lightLogo} alt="icon" /></div>
+		<div class="logo dark-logo"><img src={darkLogo} alt="logo" /></div>
+		<div class="logo light-logo"><img src={lightLogo} alt="logo" /></div>
 		<div class="name">{$_('name')}</div>
 	</div>
 	<div class="content"><slot /></div>
@@ -87,13 +87,13 @@
 	img {
 		@apply h-full max-h-full pb-6 pt-6;
 	}
-	.icon {
-		@apply h-full max-h-full;
+	.logo {
+		@apply h-full max-h-full min-w-fit;
 	}
-	.dark-icon {
+	.dark-logo {
 		@apply inline-block dark:hidden;
 	}
-	.light-icon {
+	.light-logo {
 		@apply hidden dark:inline-block;
 	}
 	.name {
