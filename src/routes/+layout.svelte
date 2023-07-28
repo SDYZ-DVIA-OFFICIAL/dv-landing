@@ -1,4 +1,6 @@
 <script>
+	import 'core-js/stable';
+	import 'regenerator-runtime/runtime';
 	import '../app.css';
 	import darkLogo from '$lib/images/DV-DARK-LOGO.svg';
 	import lightLogo from '$lib/images/DV-WHITE-LOGO.svg';

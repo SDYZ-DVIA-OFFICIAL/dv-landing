@@ -1,42 +1,70 @@
 <script>
+	import { onMount } from 'svelte';
+	import { _ } from 'svelte-i18n';
+
 	import 'animate.css/animate.min.css';
+
+	import error from '$lib/images/ERROR.jpg';
+
 	import dayjs from 'dayjs';
 	import duration from 'dayjs/plugin/duration';
-	import { _ } from 'svelte-i18n';
-	import error from '$lib/images/ERROR.jpg';
-	import { onMount } from 'svelte';
 	dayjs.extend(duration);
+
 	export let platform = 'bilibili';
-	let liveData = {
-		data: {
+	const formatWhiteList = ['mid', 'uid', 'cid', 'created'];
+
+	function LiveData(obj) {
+		this.code = 8964;
+		this.data = {
 			title: 'SDYZ',
 			online: 1000,
 			attention: 2000,
 			live_time: '1970-01-01 00:00:00',
 			live_status: 0
+		};
+		if (obj) {
+			this.code = obj.code;
+			this.data = obj.data;
+			for (const key in this.data) {
+				const value = this.data[key];
+				if (typeof value == typeof 0 && !formatWhiteList.includes(key)) {
+					this.data[`_${key}`] = formatNumber(value);
+				}
+			}
 		}
-	};
+	}
+	let liveData = new LiveData();
 	async function fetchLiveData() {
 		return await (await fetch(`/api/live/bilibili`)).json();
 	}
-	let videoData = {
-		load: 404,
-		data: {
+	function VideoData(obj) {
+		this.code = 8964;
+		this.data = {
 			list: {
 				vlist: [
 					{
 						title: 'SDYZ 2023',
 						comment: 1000,
 						play: 10000,
-						mid: 473013658,
 						created: 1699999999,
-						aid: 742421374,
 						bvid: 'BV1jk4y1M7NJ'
 					}
 				]
 			}
+		};
+		if (obj) {
+			this.code = obj.code;
+			this.data.list.vlist = obj.data.list.vlist;
+			for (const key in this.data.list.vlist[0]) {
+				const value = this.data.list.vlist[0][key];
+				if (typeof value == typeof 0 && !formatWhiteList.includes(key)) {
+					this.data.list.vlist[0][`_${key}`] = formatNumber(value);
+				}
+			}
 		}
-	};
+	}
+
+	let videoData = new VideoData();
 	async function fetchVideoData() {
 		return await (await fetch(`/api/video/bilibili`)).json();
 	}
@@ -46,17 +74,14 @@
 		} else {
 			if (num >= 1000000) return `${String(num)[0]}.${String(num)[1]}M`;
 		}
-		return num;
+		if (num >= 1000) return `${String(num)[0]}.${String(num)[1]}K`;
+		return Number(num);
 	}
-	$: {
-		(() => {
-			liveData.data.online = formatNumber(liveData.data.online);
-			liveData.data.attention = formatNumber(liveData.data.attention);
-			videoData.data.list.vlist[0].play = formatNumber(videoData.data.list.vlist[0].play);
-			videoData.data.list.vlist[0].comment = formatNumber(videoData.data.list.vlist[0].comment);
-		})(platform);
-	}
-	const date = {};
+
+	const date = {
+		now: Date.now(),
+		Date: new Date()
+	};
 	setInterval(() => {
 		date.now = Date.now();
 		date.Date = new Date();
@@ -64,27 +89,27 @@
 	$: Duration = dayjs
 		.duration(date.now - Number(+dayjs(liveData.data.live_time)), 'ms')
 		.format('HH:mm:ss');
+
 	onMount(() => {
 		fetchLiveData().then((value) => {
 			if (value.code == 0) {
-				value.data.online = formatNumber(value.data.online);
-				value.data.attention = formatNumber(value.data.attention);
-				liveData = value;
+				liveData = new LiveData(value);
+				console.log(liveData);
 			}
 		});
 		fetchVideoData().then((value) => {
 			if (value.code == 0) {
-				value.data.list.vlist[0].play = formatNumber(value.data.list.vlist[0].play);
-				value.data.list.vlist[0].comment = formatNumber(value.data.list.vlist[0].comment);
-				videoData = value;
+				videoData = new VideoData(value);
+				console.log(videoData);
 			}
 		});
+
 		setInterval(fetchLiveData, 150000);
 	});
 </script>
 
 <div class="main">
-	{#if videoData.load !== 404 || liveData.data.live_status !== 0}
+	{#if videoData.code !== 8964 || liveData.data.live_status !== 0}
 		<table>
 			<thead>
 				<tr>
@@ -103,10 +128,10 @@
 						<div>
 							{#if liveData.data.live_status !== 0}
 								<div>{$_('watcher')}</div>
-								<div>{liveData.data.online}</div>
+								<div>{liveData.data._online}</div>
 							{:else}
 								<div>{$_('play')}</div>
-								<div>{videoData.data.list.vlist[0].play}</div>
+								<div>{videoData.data.list.vlist[0]._play}</div>
 							{/if}
 						</div>
 					</th>
@@ -114,10 +139,10 @@
 						<div>
 							{#if liveData.data.live_status !== 0}
 								<div>{$_('follower')}</div>
-								<div>{liveData.data.attention}</div>
+								<div>{liveData.data._attention}</div>
 							{:else}
 								<div>{$_('comment')}</div>
-								<div>{videoData.data.list.vlist[0].comment}</div>
+								<div>{videoData.data.list.vlist[0]._comment}</div>
 							{/if}
 						</div>
 					</th>
@@ -125,7 +150,7 @@
 						<th>
 							<div>
 								<div>{$_('follower')}</div>
-								<div>{liveData.data.attention}</div>
+								<div>{liveData.data._attention}</div>
 							</div>
 						</th>
 					{/if}
@@ -138,7 +163,7 @@
 								</div>
 							{:else}
 								<div>{$_('create')}</div>
-								<div>{dayjs(videoData.data.list.vlist[0].created * 1000).format(`YYYY/MM/DD`)}</div>
+								<div>{dayjs(videoData.data.list.vlist[0].created * 1000).format(`YY/M/D`)}</div>
 							{/if}
 						</div>
 					</th>
@@ -210,10 +235,10 @@
 		@apply mr-0;
 	}
 	tbody > tr > th > div {
-		@apply ml-1 mr-1 rounded-lg bg-red-300 pb-2 pl-4 pr-4 pt-2 text-base font-semibold shadow-lg shadow-red-300 dark:bg-cyan-700 dark:shadow-cyan-700 sm:text-xl;
+		@apply ml-1 mr-1 break-keep rounded-lg bg-red-300 pb-2 pl-4 pr-4 pt-2 text-base font-semibold shadow-lg shadow-red-300 dark:bg-cyan-700 dark:shadow-cyan-700 sm:text-xl;
 	}
 	tbody > tr > th > div > div:first-child {
-		@apply text-sm font-normal;
+		@apply text-xs font-normal md:text-sm;
 	}
 	.video {
 		position: relative;
