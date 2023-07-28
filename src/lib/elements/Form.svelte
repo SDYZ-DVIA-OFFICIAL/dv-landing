@@ -1,4 +1,5 @@
 <script>
+	import 'remixicon/fonts/remixicon.css';
 	export let src = '',
 		title = '';
 </script>
