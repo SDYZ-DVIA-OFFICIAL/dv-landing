@@ -32,6 +32,19 @@
 		name="description"
 		content="The Digital Video Intelligence Association Official Website. DVIA is the place where your dreams come true."
 	/>
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/pace.min.js"
+		integrity="sha512-2cbsQGdowNDPcKuoBd2bCcsJky87Mv0LEtD/nunJUgk6MOYTgVMGihS/xCEghNf04DPhNiJ4DZw5BxDd1uyOdw=="
+		crossorigin="anonymous"
+		referrerpolicy="no-referrer"
+	></script>
+	<link
+		rel="stylesheet"
+		href="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/pace-theme-default.min.css"
+		integrity="sha512-Ai6m3x6GYjuLAcJXEGBxHPLNOj6eIxh+/21wGpXT9B2dmcdvaFqEZr+/H/aaup+Rrkw4t3FzifGIuYhVPuBsrg=="
+		crossorigin="anonymous"
+		referrerpolicy="no-referrer"
+	/>
 </svelte:head>
 
 <div class="main">
