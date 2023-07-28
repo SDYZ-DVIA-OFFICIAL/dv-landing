@@ -46,6 +46,7 @@
 		} else {
 			if (num >= 1000000) return `${String(num)[0]}.${String(num)[1]}M`;
 		}
+		if (num >= 1000) return `${String(num)[0]}.${String(num)[1]}K`;
 		return num;
 	}
 	$: {
@@ -138,7 +139,7 @@
 								</div>
 							{:else}
 								<div>{$_('create')}</div>
-								<div>{dayjs(videoData.data.list.vlist[0].created * 1000).format(`YYYY/MM/DD`)}</div>
+								<div>{dayjs(videoData.data.list.vlist[0].created * 1000).format(`YY/M/D`)}</div>
 							{/if}
 						</div>
 					</th>
@@ -210,10 +211,10 @@
 		@apply mr-0;
 	}
 	tbody > tr > th > div {
-		@apply ml-1 mr-1 rounded-lg bg-red-300 pb-2 pl-4 pr-4 pt-2 text-base font-semibold shadow-lg shadow-red-300 dark:bg-cyan-700 dark:shadow-cyan-700 sm:text-xl;
+		@apply ml-1 mr-1 break-keep rounded-lg bg-red-300 pb-2 pl-4 pr-4 pt-2 text-base font-semibold shadow-lg shadow-red-300 dark:bg-cyan-700 dark:shadow-cyan-700 sm:text-xl;
 	}
 	tbody > tr > th > div > div:first-child {
-		@apply text-sm font-normal;
+		@apply text-xs font-normal md:text-sm;
 	}
 	.video {
 		position: relative;
