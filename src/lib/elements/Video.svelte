@@ -43,11 +43,11 @@
 			list: {
 				vlist: [
 					{
-						title: 'SDYZ 2023',
+						title: 'SDYZ',
 						comment: 1000,
 						play: 10000,
-						created: 1699999999,
-						bvid: 'BV1jk4y1M7NJ'
+						created: 1700000000,
+						bvid: 'BV0000000000'
 					}
 				]
 			}
@@ -94,13 +94,11 @@
 		fetchLiveData().then((value) => {
 			if (value.code == 0) {
 				liveData = new LiveData(value);
-				console.log(liveData);
 			}
 		});
 		fetchVideoData().then((value) => {
 			if (value.code == 0) {
 				videoData = new VideoData(value);
-				console.log(videoData);
 			}
 		});
 
@@ -176,7 +174,7 @@
 			{#if platform === 'bilibili'}
 				<iframe
 					title="bilibili live"
-					src="https://www.bilibili.com/blackboard/live/live-activity-player.html?cid=22590024&quality=0"
+					src="https://www.bilibili.com/blackboard/live/live-activity-player.html?cid=22590024&quality=1"
 					frameborder="no"
 					framespacing="0"
 					scrolling="no"
@@ -194,10 +192,10 @@
 					allowfullscreen="true"
 				/>
 			{/if}
-		{:else if videoData.load != 404}
+		{:else if videoData.code !== 8964}
 			<iframe
 				title="latest video"
-				src="https://player.bilibili.com/player.html?aid=742421374&bvid=BV1jk4y1M7NJ&cid=1166635786&page=1&high_quality=1"
+				src={`https://player.bilibili.com/player.html?bvid=${videoData.data.list.vlist[0].bvid}`}
 				scrolling="no"
 				border="0"
 				frameborder="no"
