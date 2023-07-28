@@ -1,4 +1,5 @@
 import { getWridWts } from '$lib/server/getWridWts';
+import { env } from '$env/dynamic/private';
 
 export async function GET() {
 	const url = `https://api.live.bilibili.com/room/v1/Room/get_info?room_id=22590024&${await getWridWts()}`;
@@ -21,7 +22,8 @@ export async function GET() {
 						'sec-fetch-mode': 'navigate',
 						'sec-fetch-site': 'none',
 						'sec-fetch-user': '?1',
-						'upgrade-insecure-requests': '1'
+						'upgrade-insecure-requests': '1',
+						cookie: env.COOKIE
 					}
 				})
 			).json()

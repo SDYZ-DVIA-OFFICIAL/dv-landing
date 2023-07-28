@@ -1,4 +1,5 @@
 import { getWridWts } from '$lib/server/getWridWts';
+import { env } from '$env/dynamic/private';
 
 export async function GET() {
 	const url = `https://api.bilibili.com/x/space/wbi/arc/search?mid=473013658&ps=30&tid=0&pn=1&keyword=&order=pubdate&platform=web&web_location=1550101&order_avoided=true&${await getWridWts()}`;
@@ -21,14 +22,13 @@ export async function GET() {
 						'sec-fetch-mode': 'navigate',
 						'sec-fetch-site': 'none',
 						'sec-fetch-user': '?1',
-						'upgrade-insecure-requests': '1'
+						'upgrade-insecure-requests': '1',
+						cookie: env.COOKIE
 					}
 				})
 			).json()
 		)
 	);
-
 	data.headers.set('Content-Type', 'application/json; charset=utf-8');
-	console.log(url);
 	return data;
 }
