@@ -56,6 +56,14 @@
 			videoData.data.list.vlist[0].comment = formatNumber(videoData.data.list.vlist[0].comment);
 		})(platform);
 	}
+	const date = {};
+	setInterval(() => {
+		date.now = Date.now();
+		date.Date = new Date();
+	}, 25);
+	$: Duration = dayjs
+		.duration(date.now - Number(+dayjs(liveData.data.live_time)), 'ms')
+		.format('HH:mm:ss');
 	onMount(() => {
 		fetchLiveData().then((value) => {
 			if (value.code == 0) {
@@ -80,7 +88,8 @@
 		<table>
 			<thead>
 				<tr>
-					<th colspan="3">
+					<th>
+						colspan="3">
 						{#if liveData.data.live_status !== 0}
 							<div>{$_('liveNow')} {liveData.data.title}</div>
 						{:else}
@@ -91,8 +100,8 @@
 			</thead>
 			<tbody>
 				<tr>
-					<th
-						><div>
+					<th>
+						<div>
 							{#if liveData.data.live_status !== 0}
 								<div>{$_('watcher')}</div>
 								<div>{liveData.data.online}</div>
@@ -100,10 +109,10 @@
 								<div>{$_('play')}</div>
 								<div>{videoData.data.list.vlist[0].play}</div>
 							{/if}
-						</div></th
-					>
-					<th
-						><div>
+						</div>
+					</th>
+					<th>
+						<div>
 							{#if liveData.data.live_status !== 0}
 								<div>{$_('follower')}</div>
 								<div>{liveData.data.attention}</div>
@@ -111,24 +120,29 @@
 								<div>{$_('comment')}</div>
 								<div>{videoData.data.list.vlist[0].comment}</div>
 							{/if}
-						</div></th
-					>
-					<th
-						><div>
+						</div>
+					</th>
+					{#if liveData.data.live_status === 0}
+						<th>
+							<div>
+								<div>{$_('follower')}</div>
+								<div>{liveData.data.attention}</div>
+							</div>
+						</th>
+					{/if}
+					<th>
+						<div>
 							{#if liveData.data.live_status !== 0}
 								<div>{$_('duration')}</div>
 								<div>
-									{dayjs.duration(
-										Date.now() - dayjs(liveData.data.live_time).millisecond(),
-										'm'
-									)}{$_('minutes')}
+									{Duration}
 								</div>
 							{:else}
 								<div>{$_('create')}</div>
 								<div>{dayjs(videoData.data.list.vlist[0].created * 1000).format(`YYYY/MM/DD`)}</div>
 							{/if}
-						</div></th
-					>
+						</div>
+					</th>
 				</tr>
 			</tbody>
 		</table>
