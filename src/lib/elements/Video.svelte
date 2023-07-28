@@ -2,6 +2,7 @@
 	import { onMount } from 'svelte';
 	import { _ } from 'svelte-i18n';
 
+	import 'remixicon/fonts/remixicon.css';
 	import 'animate.css/animate.min.css';
 
 	import error from '$lib/images/ERROR.jpg';
@@ -113,9 +114,17 @@
 				<tr>
 					<th colspan="3">
 						{#if liveData.data.live_status !== 0}
-							<div>{$_('liveNow')} {liveData.data.title}</div>
+							<div>
+								<i class="ri-live-line text-red-600" />
+								{$_('liveNow')}
+								{liveData.data.title}
+							</div>
 						{:else}
-							<div>{$_('latestVideo')} {videoData.data.list.vlist[0].title}</div>
+							<div>
+								<i class="ri-refresh-line" />
+								{$_('latestVideo')}
+								{videoData.data.list.vlist[0].title}
+							</div>
 						{/if}
 					</th>
 				</tr>
@@ -221,7 +230,7 @@
 		@apply mb-2 w-full text-left;
 	}
 	thead > tr > th > div {
-		@apply ml-2;
+		@apply ml-1;
 	}
 	thead > tr > th {
 		@apply text-sm font-normal;
