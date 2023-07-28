@@ -30,9 +30,9 @@
 
 <style lang="postcss">
 	:global(body) {
-		height: 100dvh;
-		height: calc(var(--1svh, 1vh) * 100); /* This is the "polyfill" */
 		height: 100vh; /* For browsers that don't support CSS variables */
+		height: calc(var(--1svh, 1vh) * 100); /* This is the "polyfill" */
+		height: 100dvh;
 	}
 	.main {
 		@apply flex h-full flex-col rounded-lg bg-red-200 shadow-lg shadow-red-200 dark:bg-cyan-800 dark:shadow-sky-800;

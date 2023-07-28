@@ -88,9 +88,9 @@
 	}
 	:global(body) {
 		font-family: 'IBM Plex Sans', 'Noto Sans SC', sans-serif;
-		min-height: 100dvh !important;
-		min-height: calc(var(--1svh, 1vh) * 100) !important; /* This is the "polyfill" */
 		min-height: 100vh !important; /* For browsers that don't support CSS variables */
+		min-height: calc(var(--1svh, 1vh) * 100) !important; /* This is the "polyfill" */
+		min-height: 100dvh !important;
 		@apply m-0 w-full bg-red-50 p-0 text-black dark:bg-cyan-950 dark:text-white md:pt-4;
 	}
 	:global(*) {
