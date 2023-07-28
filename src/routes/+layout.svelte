@@ -50,11 +50,11 @@
 </svelte:head>
 
 <div class="main">
-	<div class="nav">
+	<a href="/" class="nav">
 		<div class="logo dark-logo"><img src={darkLogo} alt="logo" /></div>
 		<div class="logo light-logo"><img src={lightLogo} alt="logo" /></div>
 		<div class="name">{$_('name')}</div>
-	</div>
+	</a>
 	<div class="content"><slot /></div>
 	<div class="footer">
 		<div>

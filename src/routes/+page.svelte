@@ -39,8 +39,7 @@
 					>
 					<a href="/" target="_blank"><i class="ri-tiktok-line" />{$_('tt')}</a>
 				{/if}
-				<a href="/sendMessage" target="_blank"><i class="ri-mail-send-line" />{$_('sendMessage')}</a
-				>
+				<a href="/sendMessage"><i class="ri-mail-send-line" />{$_('sendMessage')}</a>
 			</div>
 			<Video {platform} />
 		</div>
