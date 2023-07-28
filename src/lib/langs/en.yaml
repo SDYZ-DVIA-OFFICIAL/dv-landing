@@ -1,26 +1,29 @@
 abb: DVIA
 name: The Digital Video Intelligence Association
 motto: The place where your dreams come true.
-detail: Founded in 2006, DVIA is one of the largest and oldest digital video associations in the southern part of the People's Republic of China.
-
+detail: >-
+  Founded in 2006, DVIA is one of the largest and oldest digital video
+  associations in the southern part of the People's Republic of China.
 biliSpace: Space
 biliLive: Live
 dy: Douyin
 yt: YouTube
 tg: Telegram
 tt: Tiktok
-
 liveNow: Live Now!
 watcher: Watcher
 follower: Follower
 duration: Duration
 minutes: Minutes
 offline: Offline
-noSignal: My master, sorry! The server may be under Bilibili's risk control due to excessive traffic, and valid data cannot be obtained temporarily. If an ongoing live stream or newly uploaded video is available, it will appear here.
-
+noSignal: >-
+  My master, sorry! The server may be under Bilibili's risk control due to
+  excessive traffic, and valid data cannot be obtained temporarily. If an
+  ongoing live stream or newly uploaded video is available, it will appear here.
 latestVideo: Latest Video
 play: Play
 comment: Comment
 create: Update
-
 sendMessage: Send Messages
+
+result: Result

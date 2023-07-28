@@ -124,7 +124,6 @@
 		@apply h-full pl-4 pr-4;
 	}
 	.footer {
-		place-items: flex-en;
 		@apply mt-4 flex w-full flex-shrink-0 flex-row-reverse flex-wrap items-end justify-start
 			pb-4 pl-4 pr-4;
 	}
