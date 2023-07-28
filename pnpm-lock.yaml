@@ -14,15 +14,9 @@ dependencies:
   animate.css:
     specifier: ^4.1.1
     version: 4.1.1
-  core-js:
-    specifier: ^3.32.0
-    version: 3.32.0
   md5:
     specifier: ^2.3.0
     version: 2.3.0
-  regenerator-runtime:
-    specifier: ^0.13.11
-    version: 0.13.11
   remixicon:
     specifier: ^3.4.0
     version: 3.4.0
@@ -805,11 +799,6 @@ packages:
     resolution: {integrity: sha512-YZ3GUyn/o8gfKJlnlX7g7xq4gyO6OSuhGPKaaGssGB2qgDUS0gPgtTvoyZLTt9Ab6dC4hfc9dV5arkvc/OCmrw==}
     engines: {node: '>= 0.6'}
     dev: true
-
-  /core-js@3.32.0:
-    resolution: {integrity: sha512-rd4rYZNlF3WuoYuRIDEmbR/ga9CeuWX9U05umAvgrrZoHY4Z++cp/xwPQMvUpBB4Ag6J8KfD80G0zwCyaSxDww==}
-    requiresBuild: true
-    dev: false
 
   /cross-spawn@7.0.3:
     resolution: {integrity: sha512-iRDPJKUPVEND7dHPO8rkbOnPpyDygcDFtWjpeWNCgy8WP2rXcxXL8TskReQl6OrB2G7+UJrags1q15Fudc7G6w==}
@@ -1888,10 +1877,6 @@ packages:
     dependencies:
       picomatch: 2.3.1
     dev: true
-
-  /regenerator-runtime@0.13.11:
-    resolution: {integrity: sha512-kY1AZVr2Ra+t+piVaJ4gxaFaReZVH40AKNo7UCX6W+dEwBo/2oZJzqfuN1qLq1oL45o56cPaTXELwrTh8Fpggg==}
-    dev: false
 
   /remixicon@3.4.0:
     resolution: {integrity: sha512-T1tJfMVNbmUIYdsrCJ//FOoQ/xgiWPuE3ZZvUeDRl5h/IZWKN2eTcKeUoro1g5aeJ/Rk1mZV6QPdF8qZxIu+3A==}
