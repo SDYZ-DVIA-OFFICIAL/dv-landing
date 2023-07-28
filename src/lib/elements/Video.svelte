@@ -88,8 +88,7 @@
 		<table>
 			<thead>
 				<tr>
-					<th>
-						colspan="3">
+					<th colspan="3">
 						{#if liveData.data.live_status !== 0}
 							<div>{$_('liveNow')} {liveData.data.title}</div>
 						{:else}
