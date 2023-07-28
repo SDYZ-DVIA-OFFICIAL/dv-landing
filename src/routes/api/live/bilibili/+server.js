@@ -27,7 +27,11 @@ export async function GET() {
 		})
 	).json();
 	if (data.code === 0) {
-		data.data._title = (await translate(data.data.title, { to: 'en' })).text;
+		try {
+			data.data._title = (await translate(data.data.title, { to: 'en' })).text;
+		} catch (err) {
+			console.log(err);
+		}
 	} else {
 		data = {
 			code: data.code

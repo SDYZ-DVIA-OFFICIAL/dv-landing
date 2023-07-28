@@ -113,9 +113,22 @@
 				<tr>
 					<th colspan="3">
 						{#if liveData.data.live_status !== 0}
-							<div>{$_('liveNow')} {liveData.data.title}</div>
+							<div>
+								{$_('liveNow')}
+								{#if platform === 'bilibili'}
+									<span> {liveData.data.title}</span>
+								{:else}
+									<span> {liveData.data._title}</span>{/if}
+							</div>
 						{:else}
-							<div>{$_('latestVideo')} {videoData.data.list.vlist[0].title}</div>
+							<div>
+								{$_('latestVideo')}
+								{#if platform === 'bilibili'}
+									<span> {videoData.data.list.vlist[0].title}</span>
+								{:else}
+									<span> {videoData.data.list.vlist[0]._title}</span>
+								{/if}
+							</div>
 						{/if}
 					</th>
 				</tr>

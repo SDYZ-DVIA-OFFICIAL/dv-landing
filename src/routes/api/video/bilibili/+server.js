@@ -28,7 +28,11 @@ export async function GET() {
 	).json();
 	if (data.code === 0) {
 		for (const item of data.data.list.vlist) {
-			item._title = translate(item.title, { to: 'en' });
+			try {
+				item._title = translate(item.title, { to: 'en' });
+			} catch (err) {
+				console.log(err);
+			}
 		}
 	} else {
 		data = {
