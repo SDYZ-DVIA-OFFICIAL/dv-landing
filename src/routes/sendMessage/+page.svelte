@@ -1,7 +1,3 @@
-<script>
-	import { onMount } from 'svelte';
-</script>
-
 <div>
 	<!-- svelte-ignore a11y-no-static-element-interactions -->
 	<iframe
@@ -26,7 +22,7 @@
 		@apply overflow-visible;
 	}
 	iframe {
-		height: 150vh;
+		min-height: 200vh;
 		@apply w-full overflow-visible rounded-lg shadow-lg shadow-gray-500;
 	}
 </style>
