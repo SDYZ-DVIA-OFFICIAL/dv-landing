@@ -11,7 +11,7 @@
 	import '@fontsource/noto-sans-sc/400.css';
 	import '@fontsource/noto-sans-sc/500.css';
 	import '@fontsource/noto-sans-sc/700.css';
-
+	import 'large-small-dynamic-viewport-units-polyfill';
 	// i18n init
 	import { locale, addMessages, init, getLocaleFromNavigator, _, locales } from 'svelte-i18n';
 	import zh from '$lib/langs/zh.yaml';
@@ -90,11 +90,14 @@
 		font-family: 'IBM Plex Sans', 'Noto Sans SC', sans-serif;
 		@apply m-0 min-h-screen w-full bg-red-50 p-0 text-black dark:bg-cyan-950 dark:text-white md:pt-4;
 	}
+	:global(*) {
+		@apply grow-0;
+	}
 	.main {
-		@apply w-full md:pl-12 md:pr-12 lg:pl-32 lg:pr-32;
+		@apply flex h-full w-full  flex-col flex-nowrap md:pl-12 md:pr-12 lg:pl-32 lg:pr-32;
 	}
 	.nav {
-		@apply mb-8 flex h-20 w-full flex-row flex-nowrap items-center bg-red-200 shadow-lg shadow-red-200 dark:bg-cyan-800 dark:shadow-sky-800 md:mb-10 md:rounded-2xl lg:pl-4 lg:pr-4;
+		@apply mb-8 flex h-20 w-full flex-shrink-0 flex-row flex-nowrap items-center bg-red-200 shadow-lg shadow-red-200 dark:bg-cyan-800 dark:shadow-sky-800 md:mb-10 md:rounded-2xl lg:pl-4 lg:pr-4;
 	}
 	.nav > div {
 		@apply ml-4 mr-4;
@@ -115,7 +118,7 @@
 		@apply text-xl;
 	}
 	.content {
-		@apply pl-4 pr-4;
+		@apply h-full pl-4 pr-4;
 	}
 	.footer {
 		place-items: flex-en;

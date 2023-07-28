@@ -17,6 +17,9 @@ dependencies:
   core-js:
     specifier: ^3.32.0
     version: 3.32.0
+  large-small-dynamic-viewport-units-polyfill:
+    specifier: ^0.1.1
+    version: 0.1.1
   md5:
     specifier: ^2.3.0
     version: 2.3.0
@@ -1414,6 +1417,10 @@ packages:
   /known-css-properties@0.28.0:
     resolution: {integrity: sha512-9pSL5XB4J+ifHP0e0jmmC98OGC1nL8/JjS+fi6mnTlIf//yt/MfVLtKg7S6nCtj/8KTcWX7nRlY0XywoYY1ISQ==}
     dev: true
+
+  /large-small-dynamic-viewport-units-polyfill@0.1.1:
+    resolution: {integrity: sha512-98hOXouuWWcWGXaFwztU/LyGjwe8QNYAXRwuGiO3eI2bmDv+pvDNN5G9udP8CQldhyRcJ0gQzFigjHteTLvyQQ==}
+    dev: false
 
   /levn@0.4.1:
     resolution: {integrity: sha512-+bT2uH4E5LGE7h/n3evcS/sQlJXCpIp6ym8OWJ5eV6+67Dsql/LaaT7qJBAt2rzfoa/5QBGBhxDix1dMt2kQKQ==}

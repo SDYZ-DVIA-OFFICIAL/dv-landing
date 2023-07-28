@@ -39,6 +39,7 @@
 		"@fontsource/noto-sans-sc": "^5.0.5",
 		"animate.css": "^4.1.1",
 		"core-js": "^3.32.0",
+		"large-small-dynamic-viewport-units-polyfill": "^0.1.1",
 		"md5": "^2.3.0",
 		"regenerator-runtime": "^0.13.11",
 		"remixicon": "^3.4.0"

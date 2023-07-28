@@ -1,4 +1,4 @@
-<div>
+<div class="main">
 	<!-- svelte-ignore a11y-no-static-element-interactions -->
 	<iframe
 		title="sendMessage"
@@ -18,11 +18,15 @@
 </div>
 
 <style lang="postcss">
-	div {
-		@apply overflow-visible;
+	:global(body) {
+		height: 100dvh;
+		height: calc(var(--1svh, 1vh) * 100); /* This is the "polyfill" */
+		height: 100vh; /* For browsers that don't support CSS variables */
+	}
+	.main {
+		@apply h-full;
 	}
 	iframe {
-		min-height: 200vh;
-		@apply w-full overflow-visible rounded-lg shadow-lg shadow-gray-500;
+		@apply h-full w-full rounded-lg shadow-lg shadow-gray-500;
 	}
 </style>
