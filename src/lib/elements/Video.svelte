@@ -202,15 +202,22 @@
 				/>
 			{/if}
 		{:else if videoData.code !== 8964}
-			<iframe
-				title="latest video"
-				src={`https://player.bilibili.com/player.html?bvid=${videoData.data.list.vlist[0].bvid}`}
-				scrolling="no"
-				border="0"
-				frameborder="no"
-				framespacing="0"
-				allowfullscreen="true"
-			/>
+			{#if !videoData.data.list.vlist[0].data.data.accept_quality.includes(64)}
+				<iframe
+					title="latest video"
+					src={`https://player.bilibili.com/player.html?bvid=${videoData.data.list.vlist[0].bvid}`}
+					scrolling="no"
+					border="0"
+					frameborder="no"
+					framespacing="0"
+					allowfullscreen="true"
+				/>
+			{:else}
+				<video autoplay controls>
+					<track kind="captions" />
+					<source src={videoData.data.list.vlist[0].data.data.durl[0].url} />
+				</video>
+			{/if}
 		{:else}
 			<div
 				class="placeholder animate__animated animate__fast"
@@ -253,6 +260,7 @@
 		width: 100%;
 	}
 	iframe,
+	video,
 	.placeholder {
 		position: absolute;
 		top: 0;

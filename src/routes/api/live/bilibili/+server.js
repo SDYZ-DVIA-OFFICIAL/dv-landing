@@ -21,7 +21,8 @@ export async function GET() {
 				'sec-fetch-site': 'none',
 				'sec-fetch-user': '?1',
 				'upgrade-insecure-requests': '1',
-				cookie: env.COOKIE
+				cookie: env.COOKIE,
+				referer: 'https://www.bilibili.com/'
 			}
 		})
 	).json();
