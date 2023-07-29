@@ -91,6 +91,19 @@
 		.duration(date.now - Number(+dayjs(liveData.data.live_time)), 'ms')
 		.format('HH:mm:ss');
 
+	async function getTrace() {
+		const trace = await (await fetch('https://www.cloudflare.com/cdn-cgi/trace')).text();
+		function toObject(text) {
+			const lines = text.split('\n');
+			const result = {};
+			for (const line of lines) {
+				const [key, value] = line.split('=');
+				result[key] = value;
+			}
+			return result;
+		}
+		return toObject(trace);
+	}
 	onMount(() => {
 		fetchLiveData().then((value) => {
 			if (value.code == 0) {
@@ -99,7 +112,16 @@
 		});
 		fetchVideoData().then((value) => {
 			if (value.code == 0) {
-				videoData = new VideoData(value);
+				getTrace().then((trace) => {
+					if (trace.loc === 'CN') {
+						for (const data of value.data.list.vlist) {
+							const url = new URL(data.data.data.durl[0].url);
+							const path = url.pathname + url.search;
+							data.data.data.durl[0].url = `https://cn-gdfs-ct-01-01.bilivideo.com${path}`;
+						}
+					}
+					videoData = new VideoData(value);
+				});
 			}
 		});
 		setInterval(fetchLiveData, 150000);
