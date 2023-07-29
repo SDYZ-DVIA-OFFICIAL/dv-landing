@@ -2,7 +2,7 @@
 
 Build with SvelteKit.
 
-![EN Light iPad Air](/readme/EN-l-ia.png)
+![EN Light iPad Air](/readme/en-l-ia.png)
 
 ![ZH Light iPad Air](/readme/zh-l-ia.png)
 

@@ -16,6 +16,7 @@
 	import { locale, addMessages, init, getLocaleFromNavigator, _, locales } from 'svelte-i18n';
 	import zh from '$lib/langs/zh.yaml';
 	import en from '$lib/langs/en.yaml';
+	import { page } from '$app/stores';
 	addMessages('zh', zh);
 	addMessages('zh-CN', zh);
 	addMessages('zh-SG', zh);
@@ -58,30 +59,34 @@
 	<div class="content"><slot /></div>
 	<div class="footer">
 		<div>
-			<a class="hover:underline" href="https://github.com/DoNotEditIt/dv-landing"
-				><i class="ri-github-line" /> Source Code</a
-			>
-			<div>Designed by HYH!</div>
+			{#if $page.url.pathname === '/'}
+				<a class="hover:underline" href="https://github.com/DoNotEditIt/dv-landing"
+					><i class="ri-github-line" /> Source Code</a
+				>
+				<div>Designed by HYH!</div>
+			{/if}
 			<div>© {$_('abb')} 2006 - {new Date().getFullYear()}</div>
 		</div>
-		<div class="langs">
-			{#each $locales as lo, index}
-				{#if index !== 0}
-					/
-				{/if}
-				<!-- svelte-ignore a11y-click-events-have-key-events -->
-				<div
-					role="button"
-					tabindex="0"
-					data-index={index}
-					on:click={(e) => {
-						locale.set($locales[e.target.dataset.index]);
-					}}
-				>
-					{lo}
-				</div>
-			{/each}
-		</div>
+		{#if $page.url.pathname === '/'}
+			<div class="langs">
+				{#each $locales as lo, index}
+					{#if index !== 0}
+						/
+					{/if}
+					<!-- svelte-ignore a11y-click-events-have-key-events -->
+					<div
+						role="button"
+						tabindex="0"
+						data-index={index}
+						on:click={(e) => {
+							locale.set($locales[e.target.dataset.index]);
+						}}
+					>
+						{lo}
+					</div>
+				{/each}
+			</div>
+		{/if}
 	</div>
 </div>
 
