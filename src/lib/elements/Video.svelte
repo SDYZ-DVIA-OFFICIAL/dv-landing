@@ -9,7 +9,6 @@
 
 	import dayjs from 'dayjs';
 	import duration from 'dayjs/plugin/duration';
-	import { browser } from '$app/environment';
 	dayjs.extend(duration);
 
 	export let platform = 'bilibili';

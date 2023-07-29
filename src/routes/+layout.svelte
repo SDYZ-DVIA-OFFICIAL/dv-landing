@@ -58,6 +58,9 @@
 	<div class="content"><slot /></div>
 	<div class="footer">
 		<div>
+			<a class="hover:underline" href="https://github.com/DoNotEditIt/dv-landing"
+				><i class="ri-github-line" /> Source Code</a
+			>
 			<div>Designed by HYH!</div>
 			<div>© {$_('abb')} 2006 - {new Date().getFullYear()}</div>
 		</div>
