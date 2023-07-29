@@ -9,6 +9,7 @@
 
 	import dayjs from 'dayjs';
 	import duration from 'dayjs/plugin/duration';
+	import { browser } from '$app/environment';
 	dayjs.extend(duration);
 
 	export let platform = 'bilibili';
@@ -102,7 +103,6 @@
 				videoData = new VideoData(value);
 			}
 		});
-
 		setInterval(fetchLiveData, 150000);
 	});
 </script>
@@ -213,7 +213,7 @@
 					allowfullscreen="true"
 				/>
 			{:else}
-				<video autoplay controls>
+				<video autoplay controls muted>
 					<track kind="captions" />
 					<source src={videoData.data.list.vlist[0].data.data.durl[0].url} />
 				</video>
