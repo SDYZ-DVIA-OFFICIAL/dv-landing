@@ -24,13 +24,13 @@
 				<p>{$_('detail')}</p>
 			</div>
 			<div class="links">
+				<a href="https://space.bilibili.com/473013658" target="_blank"
+					><i class="ri-bilibili-line" />{$_('biliSpace')}</a
+				>
+				<a href="https://live.bilibili.com/22590024" target="_blank"
+					><i class="ri-bilibili-line" />{$_('biliLive')}</a
+				>
 				{#if platform === 'bilibili'}
-					<a href="https://space.bilibili.com/473013658" target="_blank"
-						><i class="ri-bilibili-line" />{$_('biliSpace')}</a
-					>
-					<a href="https://live.bilibili.com/22590024" target="_blank"
-						><i class="ri-bilibili-line" />{$_('biliLive')}</a
-					>
 					<a href="/" target="_blank"><i class="ri-tiktok-line" />{$_('dy')}</a>
 				{:else}
 					<a href="https://www.youtube.com/@SDYZDVIA"><i class="ri-youtube-line" />{$_('yt')}</a>

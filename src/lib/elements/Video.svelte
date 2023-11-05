@@ -133,7 +133,7 @@
 		<table>
 			<thead>
 				<tr>
-					<th colspan="3">
+					<th colspan="4">
 						{#if liveData.data.live_status !== 0}
 							<div>
 								<i class="ri-live-line text-red-600" />
@@ -165,23 +165,10 @@
 					</th>
 					<th>
 						<div>
-							{#if liveData.data.live_status !== 0}
-								<div>{$_('follower')}</div>
-								<div>{liveData.data._attention}</div>
-							{:else}
-								<div>{$_('comment')}</div>
-								<div>{videoData.data.list.vlist[0]._comment}</div>
-							{/if}
+							<div>{$_('follower')}</div>
+							<div>{liveData.data._attention}</div>
 						</div>
 					</th>
-					{#if liveData.data.live_status === 0}
-						<th>
-							<div>
-								<div>{$_('follower')}</div>
-								<div>{liveData.data._attention}</div>
-							</div>
-						</th>
-					{/if}
 					<th>
 						<div>
 							{#if liveData.data.live_status !== 0}
@@ -252,7 +239,7 @@
 
 <style lang="postcss">
 	.main {
-		@apply mb-4 mt-4 overflow-hidden rounded-xl bg-red-200 p-2 shadow-lg  shadow-red-200 dark:bg-cyan-800 dark:shadow-sky-800;
+		@apply mb-4 mt-4 overflow-hidden rounded-xl bg-red-300 p-2 shadow-lg  shadow-red-300 dark:bg-cyan-900 dark:shadow-sky-900;
 	}
 	table {
 		@apply mb-2 w-full text-left;
@@ -270,7 +257,7 @@
 		@apply mr-0;
 	}
 	tbody > tr > th > div {
-		@apply ml-1 mr-1 break-keep rounded-lg bg-red-300 pb-2 pl-4 pr-4 pt-2 text-base font-semibold shadow-lg shadow-red-300 dark:bg-cyan-700 dark:shadow-cyan-700 sm:text-xl;
+		@apply ml-1 mr-1 break-keep rounded-lg bg-red-400 pb-2 pl-4 pr-4 pt-2 text-base font-semibold text-white shadow-lg shadow-red-400 dark:bg-cyan-800 dark:shadow-cyan-800 sm:text-xl;
 	}
 	tbody > tr > th > div > div:first-child {
 		@apply text-xs font-normal md:text-sm;
