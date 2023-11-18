@@ -17,15 +17,15 @@
 	import zh from '$lib/langs/zh.yaml';
 	import en from '$lib/langs/en.yaml';
 	import { page } from '$app/stores';
+	import { onMount } from 'svelte';
 	addMessages('zh', zh);
-	addMessages('zh-CN', zh);
-	addMessages('zh-SG', zh);
 	addMessages('en', en);
-	addMessages('en-US', en);
-	addMessages('en-GB', en);
 	init({
-		fallbackLocale: 'en',
-		initialLocale: getLocaleFromNavigator()
+		fallbackLocale: 'zh',
+		initialLocale: 'zh'
+	});
+	onMount(() => {
+		locale.set(getLocaleFromNavigator().slice(0, 2));
 	});
 </script>
 

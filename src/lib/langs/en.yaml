@@ -16,6 +16,7 @@ follower: Follower
 duration: Duration
 minutes: Minutes
 offline: Offline
+waiting: Fetching data, please wait...
 noSignal: >-
   My master, sorry! The server may be under Bilibili's risk control due to
   excessive traffic, and valid data cannot be obtained temporarily. If an
@@ -24,6 +25,9 @@ latestVideo: Latest Video
 play: Play
 comment: Comment
 create: Update
-sendMessage: Send Message
 
+sendMessage: Send Message
 result: Result
+
+sourcecode: Source Code
+design: Designed by Intza

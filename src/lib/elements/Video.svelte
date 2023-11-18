@@ -14,22 +14,24 @@
 	export let platform = 'bilibili';
 	const formatWhiteList = ['mid', 'uid', 'cid', 'created'];
 
-	function LiveData(obj) {
-		this.code = 8964;
-		this.data = {
-			title: 'SDYZ',
-			online: 1000,
-			attention: 2000,
-			live_time: '1970-01-01 00:00:00',
-			live_status: 0
-		};
-		if (obj) {
-			this.code = obj.code;
-			this.data = obj.data;
-			for (const key in this.data) {
-				const value = this.data[key];
-				if (typeof value == typeof 0 && !formatWhiteList.includes(key)) {
-					this.data[`_${key}`] = formatNumber(value);
+	class LiveData {
+		constructor(obj) {
+			this.code = 100;
+			this.data = {
+				title: 'SDYZ',
+				online: 1000,
+				attention: 2000,
+				live_time: '1970-01-01 00:00:00',
+				live_status: 0
+			};
+			if (obj) {
+				this.code = obj.code;
+				this.data = obj.data;
+				for (const key in this.data) {
+					const value = this.data[key];
+					if (typeof value == typeof 0 && !formatWhiteList.includes(key)) {
+						this.data[`_${key}`] = formatNumber(value);
+					}
 				}
 			}
 		}
@@ -38,28 +40,30 @@
 	async function fetchLiveData() {
 		return await (await fetch(`/api/live/bilibili`)).json();
 	}
-	function VideoData(obj) {
-		this.code = 8964;
-		this.data = {
-			list: {
-				vlist: [
-					{
-						title: 'SDYZ',
-						comment: 1000,
-						play: 10000,
-						created: 1700000000,
-						bvid: 'BV0000000000'
+	class VideoData {
+		constructor(obj) {
+			this.code = 100;
+			this.data = {
+				list: {
+					vlist: [
+						{
+							title: 'SDYZ',
+							comment: 1000,
+							play: 10000,
+							created: 1700000000,
+							bvid: 'BV0000000000'
+						}
+					]
+				}
+			};
+			if (obj) {
+				this.code = obj.code;
+				this.data.list.vlist = obj.data.list.vlist;
+				for (const key in this.data.list.vlist[0]) {
+					const value = this.data.list.vlist[0][key];
+					if (typeof value == typeof 0 && !formatWhiteList.includes(key)) {
+						this.data.list.vlist[0][`_${key}`] = formatNumber(value);
 					}
-				]
-			}
-		};
-		if (obj) {
-			this.code = obj.code;
-			this.data.list.vlist = obj.data.list.vlist;
-			for (const key in this.data.list.vlist[0]) {
-				const value = this.data.list.vlist[0][key];
-				if (typeof value == typeof 0 && !formatWhiteList.includes(key)) {
-					this.data.list.vlist[0][`_${key}`] = formatNumber(value);
 				}
 			}
 		}
@@ -105,35 +109,45 @@
 		return toObject(trace);
 	}
 	onMount(() => {
-		fetchLiveData().then((value) => {
-			if (value.code == 0) {
-				liveData = new LiveData(value);
-			}
-		});
-		fetchVideoData().then((value) => {
-			if (value.code == 0) {
-				getTrace().then((trace) => {
-					if (trace.loc === 'CN') {
-						for (const data of value.data.list.vlist) {
-							const url = new URL(data.data.data.durl[0].url);
-							const path = url.pathname + url.search;
-							data.data.data.durl[0].url = `https://cn-gdfs-ct-01-01.bilivideo.com${path}`;
+		fetchLiveData()
+			.then((value) => {
+				if (value.code == 0) {
+					liveData = new LiveData(value);
+				}
+			})
+			.catch((err) => {
+				liveData.code = 404;
+				console.log(err);
+			});
+		fetchVideoData()
+			.then((value) => {
+				if (value.code == 0) {
+					getTrace().then((trace) => {
+						if (trace.loc === 'CN') {
+							for (const data of value.data.list.vlist) {
+								const url = new URL(data.data.data.durl[0].url);
+								const path = url.pathname + url.search;
+								data.data.data.durl[0].url = `https://cn-gdfs-ct-01-01.bilivideo.com${path}`;
+							}
 						}
-					}
-					videoData = new VideoData(value);
-				});
-			}
-		});
+						videoData = new VideoData(value);
+					});
+				}
+			})
+			.catch((err) => {
+				videoData.code = 404;
+				console.log(err);
+			});
 		setInterval(fetchLiveData, 150000);
 	});
 </script>
 
 <div class="main">
-	{#if videoData.code !== 8964 || liveData.data.live_status !== 0}
+	{#if (videoData.code !== 100 && videoData.code !== 404) || liveData.data.live_status !== 0}
 		<table>
 			<thead>
 				<tr>
-					<th colspan="4">
+					<th colspan="3">
 						{#if liveData.data.live_status !== 0}
 							<div>
 								<i class="ri-live-line text-red-600" />
@@ -163,12 +177,14 @@
 							{/if}
 						</div>
 					</th>
-					<th>
-						<div>
-							<div>{$_('follower')}</div>
-							<div>{liveData.data._attention}</div>
-						</div>
-					</th>
+					{#if liveData.data._attention}
+						<th>
+							<div>
+								<div>{$_('follower')}</div>
+								<div>{liveData.data._attention}</div>
+							</div>
+						</th>
+					{/if}
 					<th>
 						<div>
 							{#if liveData.data.live_status !== 0}
@@ -187,7 +203,15 @@
 		</table>
 	{/if}
 	<div class="video">
-		{#if liveData.data.live_status !== 0}
+		{#if liveData.code === 100 && videoData.code === 100}
+			<div class="placeholder" style="background-color: black">
+				<div>{$_('waiting')}</div>
+			</div>
+		{:else if (liveData.code === 404 && videoData.code === 404) || (liveData.data.live_status === 0 && videoData.code === 404)}
+			<div class="placeholder" style="background-image: url({error})">
+				<div>{$_('noSignal')}</div>
+			</div>
+		{:else if liveData.data.live_status !== 0}
 			{#if platform === 'bilibili'}
 				<iframe
 					title="bilibili live"
@@ -209,7 +233,7 @@
 					allowfullscreen="true"
 				/>
 			{/if}
-		{:else if videoData.code !== 8964}
+		{:else if videoData.code !== 100}
 			{#if !videoData.data.list.vlist[0].data.data.accept_quality.includes(64)}
 				<iframe
 					title="latest video"
@@ -226,13 +250,6 @@
 					<source src={videoData.data.list.vlist[0].data.data.durl[0].url} />
 				</video>
 			{/if}
-		{:else}
-			<div
-				class="placeholder animate__animated animate__fast"
-				style="background-image: url({error})"
-			>
-				<div>{$_('noSignal')}</div>
-			</div>
 		{/if}
 	</div>
 </div>
@@ -278,7 +295,6 @@
 		@apply overflow-hidden rounded-lg bg-black shadow-md shadow-black;
 	}
 	.placeholder {
-		animation: wait 10s ease-in-out, headShake 1s ease-in-out 10s;
 		@apply z-0 flex flex-nowrap content-center items-center justify-center  bg-cover bg-center bg-no-repeat text-gray-100 md:text-xl;
 	}
 	@keyframes wait {
