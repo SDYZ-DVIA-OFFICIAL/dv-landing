@@ -61,15 +61,15 @@
 		<div>
 			{#if $page.url.pathname === '/'}
 				<a class="hover:underline" href="https://github.com/DoNotEditIt/dv-landing"
-					><i class="ri-github-line" /> Source Code</a
+					><i class="ri-github-line" /> {$_('sourcecode')}</a
 				>
-				<div>Designed by HYH!</div>
+				<div>{$_('design')}</div>
 			{/if}
 			<div>© {$_('abb')} 2006 - {new Date().getFullYear()}</div>
 		</div>
 		{#if $page.url.pathname === '/'}
 			<div class="langs">
-				{#each $locales as lo, index}
+				{#each $locales as loc, index}
 					{#if index !== 0}
 						/
 					{/if}
@@ -82,7 +82,7 @@
 							locale.set($locales[e.target.dataset.index]);
 						}}
 					>
-						{lo}
+						{loc}
 					</div>
 				{/each}
 			</div>
