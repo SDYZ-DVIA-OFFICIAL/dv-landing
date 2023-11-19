@@ -52,9 +52,12 @@
 
 <div class="main">
 	<a href="/" class="nav">
-		<div class="logo dark-logo"><img src={darkLogo} alt="logo" /></div>
-		<div class="logo light-logo"><img src={lightLogo} alt="logo" /></div>
-		<div class="name">{$_('name')}</div>
+		<div class="title">
+			<div class="logo dark-logo"><img src={darkLogo} alt="logo" /></div>
+			<div class="logo light-logo"><img src={lightLogo} alt="logo" /></div>
+			<div class="name">{$_('name')}</div>
+		</div>
+		<div class="items" />
 	</a>
 	<div class="content"><slot /></div>
 	<div class="footer">
@@ -99,7 +102,7 @@
 		min-height: 100vh !important; /* For browsers that don't support CSS variables */
 		min-height: calc(var(--1svh, 1vh) * 100) !important; /* This is the "polyfill" */
 		min-height: 100dvh !important;
-		@apply m-0 w-full bg-red-50 p-0 text-black dark:bg-cyan-950 dark:text-white md:pt-4;
+		@apply m-0 w-full bg-red-100 p-0 text-black dark:bg-cyan-950 dark:text-white md:pt-4;
 	}
 	:global(*) {
 		@apply grow-0;
@@ -108,9 +111,9 @@
 		@apply flex h-full w-full flex-shrink-0 flex-col flex-nowrap md:pl-12 md:pr-12 lg:pl-32 lg:pr-32;
 	}
 	.nav {
-		@apply mb-8 flex h-20 w-full flex-shrink-0 flex-row flex-nowrap items-center bg-red-300 shadow-lg shadow-red-300 dark:bg-cyan-800 dark:shadow-sky-800 md:mb-10 md:rounded-2xl lg:pl-4 lg:pr-4;
+		@apply fixed left-0 top-0 mb-8 flex h-20 w-full flex-shrink-0 flex-row flex-nowrap justify-between bg-red-200 shadow-xl shadow-red-200 dark:bg-cyan-800 dark:shadow-sky-800 md:mb-10 lg:pl-4 lg:pr-4;
 	}
-	.nav > div {
+	.nav div {
 		@apply ml-4 mr-4;
 	}
 	img {
@@ -125,11 +128,14 @@
 	.light-logo {
 		@apply hidden dark:inline-block;
 	}
+	.title {
+		@apply flex items-center;
+	}
 	.name {
 		@apply text-xl;
 	}
 	.content {
-		@apply h-full pl-4 pr-4;
+		@apply mt-24 h-full pl-4 pr-4;
 	}
 	.footer {
 		@apply mt-4 flex w-full flex-shrink-0 flex-row-reverse flex-wrap items-end justify-start

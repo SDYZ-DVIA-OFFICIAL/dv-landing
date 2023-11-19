@@ -151,13 +151,13 @@
 						{#if liveData.data.live_status !== 0}
 							<div>
 								<i class="ri-live-line text-red-600" />
-								{$_('liveNow')}
+								<b>{$_('liveNow')}</b>
 								{liveData.data.title}
 							</div>
 						{:else}
 							<div>
 								<i class="ri-refresh-line" />
-								{$_('latestVideo')}
+								<b>{$_('latestVideo')}</b>
 								{videoData.data.list.vlist[0].title}
 							</div>
 						{/if}
@@ -256,7 +256,7 @@
 
 <style lang="postcss">
 	.main {
-		@apply mb-4 mt-4 overflow-hidden rounded-xl bg-red-300 p-2 shadow-lg  shadow-red-300 dark:bg-cyan-900 dark:shadow-sky-900;
+		@apply mb-4 mt-4 overflow-hidden rounded-xl bg-red-300 p-2 shadow-lg  shadow-red-200 dark:bg-cyan-900 dark:shadow-sky-900;
 	}
 	table {
 		@apply mb-2 w-full text-left;

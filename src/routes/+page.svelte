@@ -64,7 +64,7 @@
 		@apply inline-block w-full rounded-[2rem] shadow-xl shadow-red-600;
 	}
 	.text {
-		@apply w-full grow-0 pb-2 pt-2 md:pr-8 lg:w-2/3 lg:text-left;
+		@apply w-full grow-0 pb-2 pt-2 md:pr-8 lg:w-3/4 lg:text-left;
 	}
 	.motto {
 		@apply mb-4 text-3xl font-semibold capitalize md:text-5xl;
