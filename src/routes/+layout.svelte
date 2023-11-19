@@ -55,7 +55,9 @@
 		<div class="title">
 			<div class="logo dark-logo"><img src={darkLogo} alt="logo" /></div>
 			<div class="logo light-logo"><img src={lightLogo} alt="logo" /></div>
-			<div class="name">{$_('name')}</div>
+			<div class="names">
+				<span class="name">{$_('name')}</span><span class="abb">{$_('abb')}</span>
+			</div>
 		</div>
 		<div class="items" />
 	</a>
@@ -131,8 +133,14 @@
 	.title {
 		@apply flex items-center;
 	}
-	.name {
+	.names {
 		@apply text-xl;
+	}
+	.name {
+		@apply hidden md:inline;
+	}
+	.abb {
+		@apply md:hidden;
 	}
 	.content {
 		@apply mt-24 h-full pl-4 pr-4;
