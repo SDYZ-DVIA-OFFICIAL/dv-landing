@@ -28,5 +28,6 @@ export async function GET() {
 	).json();
 	const res = new Response(JSON.stringify(data));
 	res.headers.set('Content-Type', 'application/json; charset=utf-8');
+	res.headers.set('Cache-Control', 'no-cache, max-age=120');
 	return res;
 }

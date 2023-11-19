@@ -256,7 +256,7 @@
 
 <style lang="postcss">
 	.main {
-		@apply mb-4 mt-4 overflow-hidden rounded-xl bg-red-300 p-2 shadow-lg  shadow-red-200 dark:bg-cyan-900 dark:shadow-sky-900;
+		@apply mb-4 mt-4 overflow-hidden rounded-xl bg-red-300 p-2 shadow-lg  shadow-red-200 dark:bg-cyan-900 dark:shadow-cyan-900;
 	}
 	table {
 		@apply mb-2 w-full text-left;

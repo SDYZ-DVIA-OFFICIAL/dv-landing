@@ -61,7 +61,7 @@
 		@apply hidden grow md:block;
 	}
 	.big-icon > img {
-		@apply inline-block w-full rounded-[2rem] shadow-xl shadow-red-600;
+		@apply inline-block w-full rounded-[2rem] shadow-lg shadow-red-500;
 	}
 	.text {
 		@apply w-full grow-0 pb-2 pt-2 md:pr-8 lg:w-3/4 lg:text-left;

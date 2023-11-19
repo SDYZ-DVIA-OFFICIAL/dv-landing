@@ -113,7 +113,7 @@
 		@apply flex h-full w-full flex-shrink-0 flex-col flex-nowrap md:pl-12 md:pr-12 lg:pl-32 lg:pr-32;
 	}
 	.nav {
-		@apply fixed left-0 top-0 mb-8 flex h-20 w-full flex-shrink-0 flex-row flex-nowrap justify-between bg-red-200 shadow-xl shadow-red-200 dark:bg-cyan-800 dark:shadow-sky-800 md:mb-10 lg:pl-4 lg:pr-4;
+		@apply fixed left-0 top-0 mb-8 flex h-20 w-full flex-shrink-0 flex-row flex-nowrap justify-between bg-red-200 shadow-xl shadow-red-200 dark:bg-cyan-900 dark:shadow-cyan-900 md:mb-10 lg:pl-4 lg:pr-4;
 	}
 	.nav div {
 		@apply ml-4 mr-4;
