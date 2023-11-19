@@ -17,7 +17,7 @@
 	<div class="head">
 		<div class="text">
 			<div class="motto">
-				<div class="small-icon"><img src={icon} alt="icon" /></div>
+				<div class="small-icon"><img src={icon} alt="icon" width="1000" height="1000" /></div>
 				{$_('motto')}
 			</div>
 			<div class="detail">
@@ -43,7 +43,7 @@
 			</div>
 			<Video {platform} />
 		</div>
-		<div class="big-icon"><img src={icon} alt="icon" /></div>
+		<div class="big-icon"><img src={icon} alt="icon" width="1000" height="1000" /></div>
 	</div>
 </div>
 
@@ -55,7 +55,7 @@
 		@apply inline-block h-10 md:hidden;
 	}
 	.small-icon > img {
-		@apply mb-2 inline-block h-6 rounded-md;
+		@apply mb-2 inline-block h-6 w-fit rounded-md;
 	}
 	.big-icon {
 		@apply hidden grow md:block;
@@ -73,7 +73,7 @@
 		@apply mb-4 mt-4 text-lg font-normal;
 	}
 	.links > a {
-		@apply inline;
+		@apply inline whitespace-nowrap;
 	}
 	i {
 		@apply pl-1 pr-1;

@@ -53,8 +53,12 @@
 <div class="main">
 	<a href="/" class="nav">
 		<div class="title">
-			<div class="logo dark-logo"><img src={darkLogo} alt="logo" /></div>
-			<div class="logo light-logo"><img src={lightLogo} alt="logo" /></div>
+			<div class="logo dark-logo">
+				<img src={darkLogo} alt="logo" width="2685" height="1356" />
+			</div>
+			<div class="logo light-logo">
+				<img src={lightLogo} alt="logo" width="2685" height="1356" />
+			</div>
 			<div class="names">
 				<span class="name">{$_('name')}</span><span class="abb">{$_('abb')}</span>
 			</div>
@@ -70,7 +74,7 @@
 				>
 				<div>{$_('design')}</div>
 			{/if}
-			<div>© {$_('abb')} 2006 - {new Date().getFullYear()}</div>
+			<div>© {$_('abb')} 2008 - {new Date().getFullYear()}</div>
 		</div>
 		{#if $page.url.pathname === '/'}
 			<div class="langs">
@@ -113,16 +117,16 @@
 		@apply flex h-full w-full flex-shrink-0 flex-col flex-nowrap md:pl-12 md:pr-12 lg:pl-32 lg:pr-32;
 	}
 	.nav {
-		@apply fixed left-0 top-0 mb-8 flex h-20 w-full flex-shrink-0 flex-row flex-nowrap justify-between bg-red-200 shadow-xl shadow-red-200 dark:bg-cyan-900 dark:shadow-cyan-900 md:mb-10 lg:pl-4 lg:pr-4;
+		@apply fixed left-0 top-0 z-50 mb-8 flex h-20 w-full flex-shrink-0 flex-row flex-nowrap justify-between bg-red-200 shadow-xl shadow-red-200 dark:bg-cyan-900 dark:shadow-cyan-900 md:mb-10 lg:pl-4 lg:pr-4;
 	}
 	.nav div {
 		@apply ml-4 mr-4;
 	}
 	img {
-		@apply h-full max-h-full pb-6 pt-6;
+		@apply h-full max-h-full w-fit pb-6 pt-6;
 	}
 	.logo {
-		@apply h-full max-h-full min-w-fit;
+		@apply h-full max-h-full w-fit;
 	}
 	.dark-logo {
 		@apply inline-block dark:hidden;
@@ -143,7 +147,7 @@
 		@apply md:hidden;
 	}
 	.content {
-		@apply mt-24 h-full pl-4 pr-4;
+		@apply mt-28 h-full pl-4 pr-4;
 	}
 	.footer {
 		@apply mt-4 flex w-full flex-shrink-0 flex-row-reverse flex-wrap items-end justify-start
